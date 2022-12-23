@@ -1,16 +1,20 @@
-import java.sql.Connection;
-import java.sql.SQLException;
+import javax.xml.transform.Result;
+import java.sql.*;
 
 public class JdbcRunner {
 
     public static void main(String[] args) {
         try (Connection connection = ConnectionManager.openConnection()){
-            System.out.println(connection.getTransactionIsolation());
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM human");
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 }
+
 
 
 
