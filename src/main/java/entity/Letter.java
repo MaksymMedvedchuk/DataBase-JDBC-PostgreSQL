@@ -4,17 +4,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Letters {
+public class Letter {
 
 private Long id;
 private String topic;
 private String letterText;
 private Date shippingDate;
-private Humans sender;
-private final List<Humans> receivers = new ArrayList<>();
-
-    public Letters() {
-    }
+private Human sender;
+private List<Human> receivers = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -48,16 +45,20 @@ private final List<Humans> receivers = new ArrayList<>();
         this.shippingDate = shippingDate;
     }
 
-    public Humans getSender() {
+    public Human getSender() {
         return sender;
     }
 
-    public void setSender(Humans sender) {
+    public void setSender(Human sender) {
         this.sender = sender;
     }
 
-    public List<Humans> getReceivers() {
+    public List<Human> getReceivers() {
         return receivers;
+    }
+
+    public void setReceivers(List<Human> receivers) {
+        this.receivers = receivers;
     }
 
     @Override

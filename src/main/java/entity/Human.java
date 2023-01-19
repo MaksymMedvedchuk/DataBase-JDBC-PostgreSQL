@@ -1,24 +1,27 @@
 package entity;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
-public class Humans {
+public class Human {
 
     private Long id;
     private String firstName;
     private String secondName;
     private Date birthday;
+    private Integer sentLettersCount;
+    private Integer receivedLettersCount;
 
 
-    public Humans(Long id, String firstName, String secondName, Date birthday) {
+    public Human(Long id, String firstName, String secondName, Date birthday) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.birthday = birthday;
     }
 
-    public Humans() {
+    public Human() {
     }
 
     public Long getId() {
@@ -53,12 +56,28 @@ public class Humans {
         this.birthday = birthday;
     }
 
+    public Integer getSentLettersCount() {
+        return sentLettersCount;
+    }
+
+    public void setSentLettersCount(Integer sentLettersCount) {
+        this.sentLettersCount = sentLettersCount;
+    }
+
+    public Integer getReceivedLettersCount() {
+        return receivedLettersCount;
+    }
+
+    public void setReceivedLettersCount(Integer receivedLettersCount) {
+        this.receivedLettersCount = receivedLettersCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Humans humans = (Humans) o;
-        return Objects.equals(id, humans.id) && Objects.equals(firstName, humans.firstName) && Objects.equals(secondName, humans.secondName) && Objects.equals(birthday, humans.birthday);
+        Human human = (Human) o;
+        return Objects.equals(id, human.id) && Objects.equals(firstName, human.firstName) && Objects.equals(secondName, human.secondName) && Objects.equals(birthday, human.birthday);
     }
 
     @Override
@@ -68,6 +87,6 @@ public class Humans {
 
     @Override
     public String toString() {
-        return firstName + " " + secondName + " " + birthday;
+        return id + " " + firstName + " " + secondName + " " + birthday;
     }
 }
