@@ -26,7 +26,6 @@ public class HumanDao {
     private final static String SQL_INSERT_HUMAN = "INSERT INTO humans (first_name, second_name, birthday) VALUES (?, ?, ?)";
     private final static String SQL_CHECK_HUMAN_ID = "SELECT id FROM humans WHERE first_name = ? AND second_name = ? AND birthday = ?";
     private final static String SQL_FIND_BY_ID = "SELECT * FROM humans WHERE id = ?";
-    private final HumanSetHelper helper = new HumanSetHelper();
 
     public Human findByShortestLettersLength() {
         try (Connection connection = ConnectionManager.openConnection();
@@ -103,15 +102,15 @@ public class HumanDao {
     }
 
     public Human insertOrGetFromDb(Human human) {
-        Long id = fetchId(human);
-        if (id != null) {
-            human.setId(id);
+        Long idHuman = fetchIdHuman(human);
+        if (idHuman != null) {
+            human.setId(idHuman);
             return human;
         }
         return insert(human);
     }
 
-    public Long fetchId(Human human) {
+    public Long fetchIdHuman(Human human) {
         try (Connection connection = ConnectionManager.openConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_CHECK_HUMAN_ID)) {
             preparedStatement.setString(1, human.getFirstName());
@@ -152,13 +151,13 @@ public class HumanDao {
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 human.setFirstName(resultSet.getString("first_name"));
                 human.setSecondName(resultSet.getString("second_name"));
                 human.setBirthday(resultSet.getDate("birthday"));
-            } else System.out.println("There is no such id in the table");
-        } catch (SQLException e) {
-            e.printStackTrace();
+            }
+        } catch (Exception e) {
+            throw new DaoException(e);
         }
         return human;
     }

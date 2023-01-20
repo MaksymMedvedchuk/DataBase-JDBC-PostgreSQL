@@ -6,12 +6,12 @@ import java.util.List;
 
 public class Letter {
 
-private Long id;
-private String topic;
-private String letterText;
-private Date shippingDate;
-private Human sender;
-private List<Human> receivers = new ArrayList<>();
+    private Long id;
+    private String topic;
+    private String letterText;
+    private Date shippingDate;
+    private Human sender;
+    private List<Human> receivers = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -63,13 +63,6 @@ private List<Human> receivers = new ArrayList<>();
 
     @Override
     public String toString() {
-        return "Letter{" +
-                "id=" + id +
-                ", topic='" + topic + '\'' +
-                ", letterText='" + letterText + '\'' +
-                ", shippingDate=" + shippingDate +
-                ", sender=" + sender +
-                ", receivers=" + receivers +
-                '}';
+        return id + " " + topic + " " + letterText + " " + shippingDate;
     }
 }

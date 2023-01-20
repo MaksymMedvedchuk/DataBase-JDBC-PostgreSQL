@@ -1,14 +1,16 @@
 import dao.HumanDao;
+import dao.LetterDao;
 import entity.Human;
+import entity.Letter;
 
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.List;
 
 public class Runner {
 
     public static void main(String[] args) throws SQLException {
         HumanDao humanDao = new HumanDao();
+        LetterDao letterDao = new LetterDao();
 //        System.out.println(humanDao.findByShortestLettersLength());
 //        System.out.println("-----------------------------------------------------------------------------------------");
 //        List<Human> humans = humanDao.findAllWithReceivedAndSentLettersQuantity();
@@ -21,15 +23,24 @@ public class Runner {
 //        System.out.println("-----------------------------------------------------------------------------------------");
 //        System.out.println(humanDao.findEntityById(8));
 //        System.out.println("-----------------------------------------------------------------------------------------");
-//
+
         Human human = new Human();
         human.setFirstName("Ruslan");
         human.setSecondName("Gavrutenko");
         human.setBirthday(new Date(294019200000L));
-        Long checkHuman = humanDao.fetchId(human);
+        Long checkHuman = humanDao.fetchIdHuman(human);
         System.out.println(checkHuman);
+        System.out.println(humanDao.insertOrGetFromDb(human));
 
-        humanDao.insertOrGetFromDb(human);
+        Letter letter = new Letter();
+        letter.setTopic("Go");
+        letter.setLetterText("I'm studing go");
+        letter.setShippingDate(new Date(1673913600000L));
+        letter.setSender(humanDao.insertOrGetFromDb(human));
+        Long checkLetter = letterDao.fetchIdLetter(letter);
+        System.out.println(checkLetter);
+
+        System.out.println(letterDao.insertOrGetFromDB(letter));
 
 
     }
