@@ -10,8 +10,6 @@ public class Human {
     private String firstName;
     private String secondName;
     private Date birthday;//use joda time: LocalDate, LocalDateTime, Instant, Timestamp(?)
-    private Integer sentLettersCount;
-    private Integer receivedLettersCount;
 
 
     public Human(Long id, String firstName, String secondName, Date birthday) {
@@ -60,22 +58,6 @@ public class Human {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public Integer getSentLettersCount() {
-        return sentLettersCount;
-    }
-
-    public void setSentLettersCount(Integer sentLettersCount) {
-        this.sentLettersCount = sentLettersCount;
-    }
-
-    public Integer getReceivedLettersCount() {
-        return receivedLettersCount;
-    }
-
-    public void setReceivedLettersCount(Integer receivedLettersCount) {
-        this.receivedLettersCount = receivedLettersCount;
     }
 
     @Override

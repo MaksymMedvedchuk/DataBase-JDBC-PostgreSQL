@@ -14,11 +14,16 @@ public class LetterDao {
             "VALUES (?, ?, ?, ?)";
     private final static String SQL_CHECK_LETTER_ID = "SELECT id FROM letters WHERE topic = ? AND letter_text = ? AND shipping_date = ?";
 
+    public Letter insert(Letter letter) {
+        return insert(letter, null);
+    }
 
+    public Letter insertInTransaction(Letter letter, Connection connection) {
+        return insert(letter, connection);
+    }
 
-
-    public Letter insert(Letter letter, Connection connection) {
-        if (connection == null){
+    private Letter insert(Letter letter, Connection connection) {
+        if (connection == null) {
             connection = ConnectionManager.openConnection();
         }
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_LETTER, Statement.RETURN_GENERATED_KEYS)) {
@@ -36,31 +41,15 @@ public class LetterDao {
         } catch (Exception e) {
             throw new DaoException(e);
         } finally {
-            if (connection.getAutoCommit())
+            try {
+                if (connection.getAutoCommit())
+                    connection.close();
+            } catch (Exception e) {
+                System.out.println("Connection close");
+            }
         }
         return letter;
     }
-
-
-//    public Letter insert(Letter letter) {
-//        try (Connection connection = ConnectionManager.openConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_LETTER, Statement.RETURN_GENERATED_KEYS)) {
-//            preparedStatement.setString(1, letter.getTopic());
-//            preparedStatement.setString(2, letter.getLetterText());
-//            preparedStatement.setDate(3, letter.getShippingDate());
-//            preparedStatement.setLong(4, letter.getSender().getId());
-//
-//            preparedStatement.executeUpdate();
-//
-//            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-//            if (generatedKeys.next()) {
-//                letter.setId(generatedKeys.getLong("id"));
-//            }
-//        } catch (Exception e) {
-//            throw new DaoException(e);
-//        }
-//        return letter;
-//    }
 
     public Long fetchLetterId(Letter letter) {
         try (Connection connection = ConnectionManager.openConnection();
