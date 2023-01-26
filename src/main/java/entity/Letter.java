@@ -13,6 +13,21 @@ public class Letter {
     private Human sender;
     private List<Human> receivers = new ArrayList<>();
 
+    public Letter(Long id, String topic, String letterText, Date shippingDate, Human sender) {
+        this.id = id;
+        this.topic = topic;
+        this.letterText = letterText;
+        this.shippingDate = shippingDate;
+        this.sender = sender;
+    }
+
+    public Letter(String topic, String letterText, Date shippingDate, Human sender) {
+        this.topic = topic;
+        this.letterText = letterText;
+        this.shippingDate = shippingDate;
+        this.sender = sender;
+    }
+
     public Long getId() {
         return id;
     }

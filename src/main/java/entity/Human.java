@@ -9,7 +9,7 @@ public class Human {
     private Long id;
     private String firstName;
     private String secondName;
-    private Date birthday;
+    private Date birthday;//use joda time: LocalDate, LocalDateTime, Instant, Timestamp(?)
     private Integer sentLettersCount;
     private Integer receivedLettersCount;
 
@@ -22,6 +22,12 @@ public class Human {
     }
 
     public Human() {
+    }
+
+    public Human(String firstName, String secondName, Date birthday) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.birthday = birthday;
     }
 
     public Long getId() {
