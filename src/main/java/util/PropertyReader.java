@@ -10,7 +10,7 @@ public class PropertyReader {
     public static final Properties PROPERTIES = new Properties();
 
     static {
-        loadProperties();//загружаєьбся одразу з jvm і виконується 1 раз
+        loadProperties();
     }
 
     public static void loadProperties() {

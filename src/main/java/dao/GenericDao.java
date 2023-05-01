@@ -52,7 +52,6 @@ public class GenericDao {
         try (PreparedStatement insertHumanLetterLink = connection.prepareStatement(SQL_HUMAN_LETTER_REFERENCES)) {
             insertHumanLetterLink.setLong(1, receiver.getId());
             insertHumanLetterLink.setLong(2, letter.getId());
-
             insertHumanLetterLink.executeUpdate();
         } catch (Exception e) {
             throw new DaoException(e);

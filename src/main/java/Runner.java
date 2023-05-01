@@ -22,10 +22,10 @@ public class Runner {
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println(humanDao.findByLetterTopicNot("Java"));
 
-        System.out.println("-----------------------------------------------------------------------------------------");
-        Human sender = new Human("Oleksandr", "Kislinsky", new Date(637891200000L));
-        Letter letter = new Letter("Delphi", "I'm studing Delphi", new Date(1674000000000L), sender);
-        genericDao.sendLetterToAll(sender, letter);
+//        System.out.println("-----------------------------------------------------------------------------------------");
+//        Human sender = new Human("Oleksandr", "Kislinsky", new Date(637891200000L));
+//        Letter letter = new Letter("Delphi", "I'm studing Delphi", new Date(1674000000000L), sender);
+//        genericDao.sendLetterToAll(sender, letter);
     }
 }
 

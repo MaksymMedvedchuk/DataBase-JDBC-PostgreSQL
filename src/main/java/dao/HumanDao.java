@@ -166,9 +166,7 @@ public class HumanDao {
             preparedStatement.setString(1, human.getFirstName());
             preparedStatement.setString(2, human.getSecondName());
             preparedStatement.setDate(3, human.getBirthday());
-
             preparedStatement.executeUpdate();
-
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 human.setId(generatedKeys.getLong("id"));
